@@ -44,3 +44,71 @@ Make sure you don't forget to exclude things like "JUnit" or "Mockito" so that d
 
 ## Maven Standard Directory Layout
 ![Standard Maven Directory Layout](image-13.png)
+ `src` files are typically organized by *language:* java, kotlin, etc. You can also view the: [Docs for standard Maven Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
+
+## Maven Build Lifecycles
+![Maven Build LifeCycles](image-14.png)
+Work done in maven is done by Plugins. Goals are inside Phases, and phases are inside the Lifecycle. 
+
+|-------------------------------|
+|Lifecycle                      |  
+|     |------------------------ |  
+|     |    Phase                |                   
+|     |      |------------------|        
+|     |      |    Goal          |           
+|-----|-------------------------|
+
+![Pre Defined Lifecycles: Clean, default, site](image-15.png)
+
+![The 'clean' lifecycle](image-16.png)
+the 'clean' lifecycle has three phases: pre-clean, clean, and post-clean
+
+![Default Lifecycel at a High Level](image-17.png)
+
+![All Phases in the Default Lifecycle](image-18.png)
+We have the option to glue actions to each of these phases. Tons of stuff in the Default lifecycle.
+
+![Default LIfecycle for JAR Packaging](image-19.png)
+
+(Less Common)
+![Site Build Lifecycle](image-20.png)
+
+## Maven Wrapper
+**Considered a Best Practice!**
+You can distribute maven with your project using maven wrapper. This allows project-specific Maven artifacts (rather than just using whatever you IDE finds on the OS)
+
+Using this allows your builds to be more portable. 
+This might be worth coming back to in the future. 
+
+Bascially, just look this up if you ever need it.  It's just more mvn commands to create. As long as java is installed, the build will run on new machines. 
+
+This is useful for making the project more portable, either as a distributable project, or as a way to make deployments smoother. 
+
+## Maven Archetypes
+![Maven Archetypes](image-21.png)
+Many of these are out of date. Like "J2EE". 10 years dead. 
+[Check out these archetypes if you're curious](https://maven.apache.org/archetypes/index.html)
+FYI; 'archetype' is the plugin, and 'generate' is the goal. 
+
+# Section 6: Common Maven Plugins
+"Basically, maven is just a thing that runs plugins"
+
+## Overview Maven Lifecycle Plugins
+
+### DEFAULT LIFECYCLE PLUGINS
+![Compiler](image-22.png)
+![Resources](image-23.png) --> Teacher Never had to touch this
+![Surefire](image-24.png) --> Important, seems to mostly handle testing. Also handles POJO tests; has default extensions it looks for. 
+ - The jar plugin; probably don't need to worry about this one.
+![Deploy](image-25.png)
+
+### 'SITE' LIFECYCEL PLUGINS
+Probably not relevant to me. 
+
+## Maven Clean Plugin
+Run the regularly, especially while refactoring. This is because all the pre-refactor nonsense is still in the target directory, even after refactors have taken place. Whithout doing this, package will just take what's there (I think)
+![Example of using the 'clean' plugin in a pom file](image-27.png)
+The above example is great; it shows how a projet can reference the `maven-clean-plugin` and then add a reference to the `<initialize>` phase before deciding to use a clean goal: `<goal>clean</goal>` 
+
+
+![Maven Cheat Sheet](image-26.png)
